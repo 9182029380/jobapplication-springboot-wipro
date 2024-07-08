@@ -4,10 +4,9 @@ import com.wipro.wiproJobApplication.model.Jobinfo;
 
 import com.wipro.wiproJobApplication.service.Jobservice;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/wipro")
@@ -18,5 +17,22 @@ public class JobController {
     @PostMapping("/addjob")
     public Jobinfo addJob(@RequestBody Jobinfo job) {
         return jobService.addJob(job);
+    }
+    @PostMapping("/addjobs")
+    public List<Jobinfo> addJobs(@RequestBody List<Jobinfo> jobs) {
+        return jobService.addJobs(jobs);
+    }
+
+    @GetMapping("/jobs")
+    public List<Jobinfo> getAllJobs() {
+        return jobService.getAllJobs();
+    }
+    @GetMapping("/job/{id}")
+    public Jobinfo getJobById(@PathVariable int id) {
+        return jobService.getJobById(id);
+    }
+    @GetMapping("/status/{jobStatus}")
+    public List<Jobinfo> getJobsByStatus(@PathVariable String jobStatus) {
+        return jobService.getJobsByStatus(jobStatus);
     }
 }
