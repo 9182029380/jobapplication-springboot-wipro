@@ -22,7 +22,6 @@ public class JobController {
     public List<Jobinfo> addJobs(@RequestBody List<Jobinfo> jobs) {
         return jobService.addJobs(jobs);
     }
-
     @GetMapping("/jobs")
     public List<Jobinfo> getAllJobs() {
         return jobService.getAllJobs();
@@ -35,4 +34,15 @@ public class JobController {
     public List<Jobinfo> getJobsByStatus(@PathVariable String jobStatus) {
         return jobService.getJobsByStatus(jobStatus);
     }
+
+    @PutMapping("/update/{id}")
+    public Jobinfo updateJob(@PathVariable int id, @RequestBody Jobinfo job) {
+        return jobService.updateJob(id,job);
+    }
+    @DeleteMapping("/delete/{id}")
+    public String  deleteJob(@PathVariable int id) {
+        return jobService.deleteJob(id);
+    }
+
+
 }
