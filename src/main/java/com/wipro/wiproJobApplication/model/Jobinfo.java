@@ -1,9 +1,8 @@
 package com.wipro.wiproJobApplication.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,8 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "jobinfo")
+@Builder
 public class Jobinfo {
     @Id  //Pk
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id;
     public  String jobTitle;
     public  String jobDescription;
@@ -30,4 +31,6 @@ public class Jobinfo {
     public  String jobUrl;
     public  String jobStatus;
     public String designation;
+
+
 }

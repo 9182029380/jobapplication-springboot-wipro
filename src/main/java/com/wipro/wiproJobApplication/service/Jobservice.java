@@ -1,5 +1,6 @@
 package com.wipro.wiproJobApplication.service;
 
+import com.wipro.wiproJobApplication.Dto.JobRequestDto;
 import com.wipro.wiproJobApplication.model.Jobinfo;
 import com.wipro.wiproJobApplication.repo.Jobrepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,27 @@ import java.util.Optional;
 public class Jobservice {
     @Autowired
     private Jobrepo repo;
-    public Jobinfo addJob(Jobinfo job) {
-        return repo.save(job);
+    public Jobinfo addJob(JobRequestDto job) {
+        Jobinfo jobinfo = Jobinfo.builder()
+                .id(job.getId())
+                .jobTitle(job.getJobTitle())
+                .jobDescription(job.getJobDescription())
+                .company(job.getCompany())
+                .location(job.getLocation())
+                .industry(job.getIndustry())
+                .postedDate(job.getPostedDate())
+                .qualification(job.getQualification())
+                .experience(job.getExperience())
+                .salary(job.getSalary())
+                .jobType(job.getJobType())
+                .jobStatus(job.getJobStatus())
+                .jobUrl(job.getJobUrl())
+                .contactInfo(job.getContactInfo())
+                .designation(job.getDesignation())
+                .closingDate(job.getClosingDate())
+                .build();
+
+        return repo.save(jobinfo);
     }
 
     public List<Jobinfo> getAllJobs() {

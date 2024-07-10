@@ -1,9 +1,13 @@
 package com.wipro.wiproJobApplication.controller;
 
+import com.wipro.wiproJobApplication.Dto.JobRequestDto;
 import com.wipro.wiproJobApplication.model.Jobinfo;
 
 import com.wipro.wiproJobApplication.service.Jobservice;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +19,8 @@ public class JobController {
     private Jobservice jobService;
 
     @PostMapping("/addjob")
-    public Jobinfo addJob(@RequestBody Jobinfo job) {
-        return jobService.addJob(job);
+    public ResponseEntity<Jobinfo> addJob(@RequestBody @Valid JobRequestDto jobdto) {
+        return new ResponseEntity<>(jobService.addJob(jobdto), HttpStatus.CREATED);
     }
     @PostMapping("/addjobs")
     public List<Jobinfo> addJobs(@RequestBody List<Jobinfo> jobs) {
