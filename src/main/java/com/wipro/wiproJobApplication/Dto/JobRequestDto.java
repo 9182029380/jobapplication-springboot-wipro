@@ -21,6 +21,8 @@ public class JobRequestDto {
     @NotNull(message = "Job description should not be null")
     @Size(min = 10, max = 500, message = "Job description should be between 10 and 500 characters")
     public  String jobDescription;
+    @NotBlank(message = "Company is mandatory")
+    @NotNull(message = "Company should not be null")
     public  String company;
     public  String location;
     public  String industry;

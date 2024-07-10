@@ -1,6 +1,7 @@
 package com.wipro.wiproJobApplication.service;
 
 import com.wipro.wiproJobApplication.Dto.JobRequestDto;
+import com.wipro.wiproJobApplication.exceptions.JobNotFoundException;
 import com.wipro.wiproJobApplication.model.Jobinfo;
 import com.wipro.wiproJobApplication.repo.Jobrepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,13 @@ public class Jobservice {
         return repo.findAll();
     }
 
-    public Jobinfo getJobById(int id) {
-        return repo.findById(id).orElse(null);
+    public Optional<Jobinfo> getJobById(int id) throws JobNotFoundException {
+        Optional<Jobinfo> info= repo.findById(id);
+        if(info!=null){
+            return info;
+        }else{
+            throw new JobNotFoundException("user not found with id : "+id);
+        }
     }
 
     public List<Jobinfo> getJobsByStatus(String jobStatus) {

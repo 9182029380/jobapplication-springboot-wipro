@@ -1,6 +1,7 @@
 package com.wipro.wiproJobApplication.controller;
 
 import com.wipro.wiproJobApplication.Dto.JobRequestDto;
+import com.wipro.wiproJobApplication.exceptions.JobNotFoundException;
 import com.wipro.wiproJobApplication.model.Jobinfo;
 
 import com.wipro.wiproJobApplication.service.Jobservice;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/wipro")
@@ -31,7 +33,7 @@ public class JobController {
         return jobService.getAllJobs();
     }
     @GetMapping("/job/{id}")
-    public Jobinfo getJobById(@PathVariable int id) {
+    public Optional<Jobinfo> getJobById(@PathVariable int id) throws JobNotFoundException {
         return jobService.getJobById(id);
     }
     @GetMapping("/status/{jobStatus}")
@@ -47,6 +49,7 @@ public class JobController {
     public String  deleteJob(@PathVariable int id) {
         return jobService.deleteJob(id);
     }
+
 
 
 }
